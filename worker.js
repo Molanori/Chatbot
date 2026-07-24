@@ -1,9 +1,16 @@
 export default {
   async fetch(request, env) {
     
-    // ===== تنظیمات =====
-    const BOT_TOKEN = env.BOT_TOKEN || "8656405448:AAE1D0fhgdDymdZETRTIKWoNgx_0KYdu8D8";
-    const ADMIN_ID = env.ADMIN_ID || "7060511074";
+    // ===== تنظیمات با متغیرهای محیطی =====
+    const BOT_TOKEN = env.BOT_TOKEN;
+    const ADMIN_ID = env.ADMIN_ID;
+    
+    // ===== بررسی وجود متغیرها =====
+    if (!BOT_TOKEN || !ADMIN_ID) {
+      return new Response("❌ خطا: متغیرهای BOT_TOKEN و ADMIN_ID را تنظیم کنید!", {
+        status: 500
+      });
+    }
     
     // ===== تشخیص استفاده از KV =====
     const useKV = env.MY_KV ? true : false;
@@ -326,7 +333,7 @@ export default {
         await sendVoice(BOT_TOKEN, ADMIN_ID, message.voice.file_id, caption, getAdminKeyboard(userId).reply_markup);
         
       } else if (message.animation) {
-        // گیف - فوروارد میکنیم چون sendAnimation ممکنه مشکل داشته باشه
+        // گیف - فوروارد میکنیم
         await forwardMessage(BOT_TOKEN, userId, ADMIN_ID, messageId);
         await sendMessage(
           BOT_TOKEN,
