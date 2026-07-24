@@ -1,4 +1,3 @@
-
 # 🤖 ربات پیام‌رسان ناشناس تلگرام
 
 یه ربات ساده برای ارسال پیام‌های ناشناس به ادمین با قابلیت مدیریت کاربران
@@ -18,40 +17,51 @@
 
 ## 🚀 راه‌اندازی سریع
 
-### مرحله ۱: ساخت ربات تلگرام
+### مرحله ۱: دانلود کد ربات
+
+کد ربات رو می‌تونی از لینک زیر دانلود کنی:
+
+[📥 دانلود فایل worker.js](https://raw.githubusercontent.com/Molanori/Chatbot/main/worker.js)
+
+یا با دستور زیر توی ترمینال:
+```bash
+wget https://raw.githubusercontent.com/Molanori/Chatbot/main/worker.js
+```
+
+### مرحله ۲: ساخت ربات تلگرام
 
 1. برو به [@BotFather](https://t.me/BotFather) در تلگرام
 2. دستور `/newbot` رو بزن
 3. یه اسم و یوزرنیم برای ربات انتخاب کن
 4. **توکن** دریافتی رو کپی کن (یه متن مثل `8656405448:AAE1D0...`)
 
-### مرحله ۲: گرفتن آیدی ادمین
+### مرحله ۳: گرفتن آیدی ادمین
 
 1. برو به [@userinfobot](https://t.me/userinfobot)
 2. دستور `/start` رو بزن
 3. **آیدی عددی** خودت رو کپی کن (مثل `7060511074`)
 
-### مرحله ۳: دیپلوی روی Cloudflare
+### مرحله ۴: دیپلوی روی Cloudflare
 
 1. وارد [Cloudflare](https://dash.cloudflare.com) بشو
 2. از منوی سمت چپ برو به **Workers & Pages**
 3. روی **Create application** کلیک کن
 4. **Create Worker** رو انتخاب کن
-5. یه اسم برای Worker انتخاب کن (مثل `anonymous-bot`)
+5. یه اسم انتخاب کن (مثل `anonymous-bot`)
 6. روی **Deploy** کلیک کن
 7. برو به تب **Edit code**
 8. **همه کدهای داخل ویرایشگر رو پاک کن**
-9. **کد کامل ربات** که در اختیار داری رو کپی کن و جایگذاری کن
+9. محتوای فایل `worker.js` که دانلود کردی رو کپی کن و جایگذاری کن
 10. برو به تب **Settings** > **Variables**
 11. دو متغیر زیر رو اضافه کن:
-    - `BOT_TOKEN` = توکن ربات (از مرحله ۱)
-    - `ADMIN_ID` = آیدی ادمین (از مرحله ۲)
+    - `BOT_TOKEN` = توکن ربات (از مرحله ۲)
+    - `ADMIN_ID` = آیدی ادمین (از مرحله ۳)
 12. روی **Save and deploy** کلیک کن
 
-### مرحله ۴: تنظیم Webhook
+### مرحله ۵: تنظیم Webhook
 
 1. آدرس Worker خودت رو کپی کن (مثل `https://anonymous-bot.workers.dev`)
-2. تو یه مرورگر جدید این آدرس رو باز کن:
+2. تو مرورگر این آدرس رو باز کن:
 
 ```
 https://api.telegram.org/bot<TOKEN>/setWebhook?url=<WORKER_URL>
@@ -115,20 +125,18 @@ https://api.telegram.org/bot8656405448:AAE1D0.../setWebhook?url=https://anonymou
 ## 🔧 عیب‌یابی
 
 ### ربات پاسخ نمی‌ده:
-
 - Webhook رو چک کن:
 ```
 https://api.telegram.org/bot<TOKEN>/getWebhookInfo
 ```
-
 - Webhook رو دوباره تنظیم کن:
 ```
 https://api.telegram.org/bot<TOKEN>/setWebhook?url=<WORKER_URL>
 ```
 
 ### مسدودیت کار نمی‌کنه:
-
 - از دستور `/blocked` استفاده کن و ببین کاربر توی لیست هست یا نه
 - آیدی رو درست کپی کن (بدون فاصله)
+
 
 **موفق باشی! 🚀**
